@@ -1,12 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialIcons } from '@expo/vector-icons';  
+
+import Reseptit from './components/Reseptit';
+
+const screenOptions = ({ route }) => ({
+  tabBarIcon: () => {
+    if (route.name === 'Reseptit') {
+      return <MaterialIcons name="set-meal" size={24} color="black" />;
+    }
+  }
+});
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator screenOptions={screenOptions}>
+        <Tab.Screen name="Reseptit" component={Reseptit} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
